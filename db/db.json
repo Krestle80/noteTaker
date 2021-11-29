@@ -1,6 +1,39 @@
 [
     {
-        "title":"Test Title",
-        "text":"Test text"
+        "title": "Test Title",
+        "text": "Test text",
+        "id": "idsamp"
+    },
+    {
+        "title": "Test Title",
+        "text": "Test text",
+        "id": "idsamp1"
+    },
+    {
+        "title": "This is a Note",
+        "text": "Note Text, text typical of notes, one could even say a string of words joined together to make reminder for the future",
+        "id": "idsamp2"
+    },
+    {
+        "title": "jdkla;",
+        "text": "fjkdla",
+        "id": "idsamp3"
+    },
+    {
+        "title": "A Note",
+        "text": "With note things, like\n\nsomething i needed to do with notes?"
+    },
+    {
+        "title": "a note with an Id?",
+        "text": "Man if i was this not id have an id\n"
+    },
+    {
+        "title": "jk this one has an id",
+        "text": "maybe"
+    },
+    {
+        "title": "This is the note with an id",
+        "text": "for sure!",
+        "noteId": "c7c1"
     }
 ]
