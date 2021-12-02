@@ -9,16 +9,6 @@ const readFromFile = util.promisify(fs.readFile);
  *  @param {object} content The content you want to write to the file.
  *  @returns {void} Nothing
  */
-const writeToFile = (destination, content) =>
-  fs.writeFile(destination, JSON.stringify(content, null, 4), (err) =>
-    err ? console.error(err) : console.info(`\nData written to ${destination}`)
-  );
-/**
- *  Function to read data from a given a file and append some content
- *  @param {object} content The content you want to append to the file.
- *  @param {string} file The path to the file you want to save to.
- *  @returns {void} Nothing
- */
 const readAndAppend = (content, file) => {
   fs.readFile(file, 'utf8', (err, data) => {
     if (err) {
@@ -30,5 +20,31 @@ const readAndAppend = (content, file) => {
     }
   });
 };
+const deleteFromDb = (destination, dataBase, id) =>{
+  let db = JSON.stringify(dataBase)
+  console.log(db, "25")
+  let idFinder = function(){
+    for (let i = 0 ; i <= db.length; i++){
+    if(db[i] == id){
+      return i
+    }
+    else if(i = db.length){
+      break
+    }
 
-module.exports = { readFromFile, writeToFile, readAndAppend };
+    }
+  }
+  db.splice(idFinder(), 1)
+  console.log(db,"38")
+
+  // fs.writeFile(destination, JSON.stringify(content, null, 4), (err) =>
+    //   err ? console.error(err) : console.info(`\nData written to ${destination}`)
+};
+/**
+ *  Function to read data from a given a file and append some content
+ *  @param {object} content The content you want to append to the file.
+ *  @param {string} file The path to the file you want to save to.
+ *  @returns {void} Nothing
+ */
+
+module.exports = { readFromFile, deleteFromDb, readAndAppend };

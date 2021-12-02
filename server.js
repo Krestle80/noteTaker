@@ -1,9 +1,10 @@
 const express = require('express');
+const uniqid = require('uniqid');
 const path = require('path');
 const {
     readFromFile,
     readAndAppend,
-    writeToFile,
+    deleteFromDb,
   } = require('./helpers/fsUtils');
   const uuid = require('./helpers/uuid');
 
@@ -33,7 +34,7 @@ app.get('/api/notes', (req, res) => {
 })
 
 app.post('/api/notes', (req, res) => {
-    console.log(req.body);
+    console.log(req.body, "line 37");
   
     const { title, text } = req.body;
   
@@ -41,7 +42,7 @@ app.post('/api/notes', (req, res) => {
       const newNote = {
         title,
         text,
-        noteId: uuid(),
+        id: uniqid()
       };
   
       readAndAppend(newNote, './db/db.json');
@@ -50,6 +51,10 @@ app.post('/api/notes', (req, res) => {
       res.json('Error in adding Note');
     }
   });
+
+app.delete('/api/notes/:id', (req,res) => {
+  readFromFile('./db/db.json').then((data) =>deleteFromDb("./db/db.json", JSON.parse(data), req.params.id ))
+})
 
 app.listen(PORT, (req,res) => {
     console.log(`App now listening at localhost:${PORT}`) 
