@@ -10,20 +10,29 @@ const readFromFile = util.promisify(fs.readFile);
  *  @returns {void} Nothing
  */
 const readAndAppend = (content, file) => {
+  // fs.appendFile(file, content, function (err) {
+  //   if (err) throw err;
+  //   console.log('Saved!');
+  // });
   fs.readFile(file, 'utf8', (err, data) => {
     if (err) {
       console.error(err);
     } else {
       const parsedData = JSON.parse(data);
       parsedData.push(content);
-      writeToFile(file, parsedData);
+      let stringData = JSON.stringify(parsedData)
+      console.log(stringData)
+      fs.writeFile(file, stringData, function(err, result) {
+        if(err) console.log('error', err);
+      });
     }
   });
 };
 const deleteFromDb = (destination, dataBase, id) =>{
-  let db = JSON.stringify(dataBase)
-  console.log(db, "25")
-  let idFinder = function(){
+  
+  console.log(database, "25")
+  let idFinder = function(dataBase){
+    let db = JSON.parse(dataBase)
     for (let i = 0 ; i <= db.length; i++){
     if(db[i] == id){
       return i
@@ -34,7 +43,7 @@ const deleteFromDb = (destination, dataBase, id) =>{
 
     }
   }
-  db.splice(idFinder(), 1)
+  db.splice(idFinder(dataBase), 1)
   console.log(db,"38")
 
   // fs.writeFile(destination, JSON.stringify(content, null, 4), (err) =>
